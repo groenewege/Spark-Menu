@@ -966,7 +966,11 @@ class Menu {
 	{
 		if (!empty($this->pre_render_func)) 
 		{
-			$label = call_user_func($this->pre_render_func, $label);
+			if ($this->pre_render_func == 'htmlentities') {
+				$label = htmlentities($label, ENT_QUOTES, 'utf-8');
+			} else {
+				$label = call_user_func($this->pre_render_func, $label);
+			}
 		}
 		return $label;
 	}
